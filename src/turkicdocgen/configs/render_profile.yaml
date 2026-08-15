@@ -1,0 +1,25 @@
+page:
+  size: A4
+  dpi: 200
+  canvas_px: [1654, 2339]
+  margin_px: [120, 180]
+
+fonts:
+  body_px: [22, 30]
+  metadata_px: [16, 22]
+  title_px: [34, 48]
+  subtitle_px: [24, 34]
+  table_px: [20, 24]
+  page_number_px: [14, 18]
+  note_px: [14, 18]
+
+spacing:
+  line_spacing: [1.15, 1.35]
+  table_line_spacing: [1.05, 1.20]
+  paragraph_gap_px: [10, 24]
+  column_gutter_px: [55, 90]
+
+alignment:
+  body: left
+  allow_justify: false
+  table_cells: left

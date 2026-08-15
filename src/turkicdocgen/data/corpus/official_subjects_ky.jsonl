@@ -1,0 +1,3 @@
+{"id": "ky-subject-1", "language": "ky", "domain": "official", "text": "документтерди каттоо жөнүндө", "source_type": "curated", "source": "local", "license": "curated", "allowed_layouts": ["official_letter_page", "official_statement_page"], "tags": ["subject"]}
+{"id": "ky-subject-2", "language": "ky", "domain": "official", "text": "кызматтын жыйынтыгы жөнүндө", "source_type": "curated", "source": "local", "license": "curated", "allowed_layouts": ["official_letter_page", "official_statement_page"], "tags": ["subject"]}
+{"id": "ky-subject-3", "language": "ky", "domain": "official", "text": "арызды кароо жөнүндө", "source_type": "curated", "source": "local", "license": "curated", "allowed_layouts": ["official_letter_page", "official_statement_page"], "tags": ["subject"]}

@@ -1,0 +1,31 @@
+statement_templates:
+  certificate_request:
+    title:
+      kk: "Өтініш"
+      ky: "Арыз"
+      ru: "Заявление"
+    body_slots:
+      - request_reason
+      - requested_document
+      - attachment_note
+      - contact_note
+  correction_request:
+    title:
+      kk: "Өтініш"
+      ky: "Арыз"
+      ru: "Заявление"
+    body_slots:
+      - correction_reason
+      - data_field
+      - document_reference
+      - confirmation_note
+  registration_request:
+    title:
+      kk: "Өтініш"
+      ky: "Арыз"
+      ru: "Заявление"
+    body_slots:
+      - registration_reason
+      - applicant_status
+      - date_range
+      - attachment_note

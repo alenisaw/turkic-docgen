@@ -1,0 +1,17 @@
+# Target font policy. Do not bundle proprietary fonts.
+required_coverage_chars:
+  kazakh: "ӘәҒғҚқҢңӨөҰұҮүҺһІі"
+  kyrgyz: "ҢңӨөҮү"
+free_candidates:
+  serif: ["Noto Serif", "Liberation Serif", "DejaVu Serif", "PT Serif", "FreeSerif"]
+  sans: ["Noto Sans", "Liberation Sans", "DejaVu Sans", "PT Sans", "FreeSans", "Roboto"]
+  mono_or_table_safe: ["Noto Sans Mono", "DejaVu Sans Mono", "Liberation Mono"]
+optional_system_fonts:
+  - Times New Roman
+  - Arial
+  - Calibri
+rules:
+  - Keep existing repository fonts.
+  - Use optional system fonts only when Kazakh/Kyrgyz Cyrillic coverage passes.
+  - Record selected fonts, source, category, and coverage result in manifest metadata.
+  - Do not commit proprietary font files.

@@ -1,0 +1,44 @@
+qa:
+  min_body_font_px: 20
+  min_metadata_font_px: 16
+  min_table_font_px: 18
+  min_title_font_px: 32
+  ocr:
+    min_width_px: 4
+    min_height_px: 6
+
+  forbid:
+    - body_justify
+    - extreme_inter_word_gap
+    - overjustified_short_line
+    - suspicious_grid_text
+    - tiny_body_font
+    - low_text_density
+    - decorative_overlap
+    - invalid_reading_order
+    - invalid_zone_box
+
+  min_visible_chars:
+    book_page_single_column: 1800
+    book_page_two_columns: 1800
+    academic_abstract_page: 1400
+    official_statement_page: 700
+    official_letter_page: 900
+
+  form_table_density:
+    simple_form_page:
+      min_filled_fields: 15
+    simple_table_page:
+      min_filled_cells: 30
+
+  word_gap:
+    max_avg_space_multiple: 3.0
+    max_space_multiple: 6.0
+    short_line_word_count_max: 7
+    short_line_width_ratio_max: 0.80
+
+  effects:
+    max_paragraph_text_pixel_coverage: 0.10
+    max_table_cell_text_pixel_coverage: 0.15
+    max_pen_crossed_body_lines: 2
+    color_blot_max_text_coverage: 0.05

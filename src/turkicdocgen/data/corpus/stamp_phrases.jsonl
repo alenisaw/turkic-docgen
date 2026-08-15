@@ -1,0 +1,60 @@
+{"id": "kk_stamp_001", "language_mix": "kk", "text": "ҚАБЫЛДАНДЫ", "style": "received_stamp", "recommended_effect_profiles": ["official_stamped", "photocopy", "old_paper"]}
+{"id": "kk_stamp_002", "language_mix": "kk", "text": "ТЕКСЕРІЛДІ", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped", "photocopy"]}
+{"id": "kk_stamp_003", "language_mix": "kk", "text": "КӨШІРМЕ", "style": "faint_copy_mark", "recommended_effect_profiles": ["photocopy", "old_paper"]}
+{"id": "kk_stamp_004", "language_mix": "kk", "text": "РЕСМИ ҚҰЖАТ", "style": "round_seal", "recommended_effect_profiles": ["official_stamped", "old_paper"]}
+{"id": "kk_stamp_005", "language_mix": "kk", "text": "ОҚУ БӨЛІМІ", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "kk_stamp_006", "language_mix": "kk", "text": "ӘКІМШІЛІК", "style": "round_seal", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "kk_stamp_007", "language_mix": "kk", "text": "ТІРКЕЛДІ", "style": "received_stamp", "recommended_effect_profiles": ["official_stamped", "photocopy"]}
+{"id": "kk_stamp_008", "language_mix": "kk", "text": "ҚЫЗМЕТТІК", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "kk_stamp_009", "language_mix": "kk", "text": "МҰРАҒАТ", "style": "round_seal", "recommended_effect_profiles": ["old_paper", "photocopy"]}
+{"id": "kk_stamp_010", "language_mix": "kk", "text": "БЕКІТІЛДІ", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "kk_stamp_011", "language_mix": "kk", "text": "ҚАРАЛДЫ", "style": "received_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "kk_stamp_012", "language_mix": "kk", "text": "ЖАУАПТЫ БӨЛІМ", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "kk_stamp_013", "language_mix": "kk", "text": "ҚҰПИЯ ЕМЕС", "style": "rectangular_stamp", "recommended_effect_profiles": ["photocopy"]}
+{"id": "kk_stamp_014", "language_mix": "kk", "text": "ҚОЛ ҚОЙЫЛДЫ", "style": "received_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "kk_stamp_015", "language_mix": "kk", "text": "ЕСЕПКЕ АЛЫНДЫ", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped", "photocopy"]}
+{"id": "ky_stamp_001", "language_mix": "ky", "text": "КАБЫЛ АЛЫНДЫ", "style": "received_stamp", "recommended_effect_profiles": ["official_stamped", "photocopy", "old_paper"]}
+{"id": "ky_stamp_002", "language_mix": "ky", "text": "ТЕКШЕРИЛДИ", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped", "photocopy"]}
+{"id": "ky_stamp_003", "language_mix": "ky", "text": "КӨЧҮРМӨ", "style": "faint_copy_mark", "recommended_effect_profiles": ["photocopy", "old_paper"]}
+{"id": "ky_stamp_004", "language_mix": "ky", "text": "РАСМИЙ ДОКУМЕНТ", "style": "round_seal", "recommended_effect_profiles": ["official_stamped", "old_paper"]}
+{"id": "ky_stamp_005", "language_mix": "ky", "text": "ОКУУ БӨЛҮМҮ", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ky_stamp_006", "language_mix": "ky", "text": "АДМИНИСТРАЦИЯ", "style": "round_seal", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ky_stamp_007", "language_mix": "ky", "text": "КАТТАЛДЫ", "style": "received_stamp", "recommended_effect_profiles": ["official_stamped", "photocopy"]}
+{"id": "ky_stamp_008", "language_mix": "ky", "text": "КЫЗМАТТЫК", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ky_stamp_009", "language_mix": "ky", "text": "АРХИВ", "style": "round_seal", "recommended_effect_profiles": ["old_paper", "photocopy"]}
+{"id": "ky_stamp_010", "language_mix": "ky", "text": "БЕКИТИЛДИ", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ky_stamp_011", "language_mix": "ky", "text": "КАРАЛДЫ", "style": "received_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ky_stamp_012", "language_mix": "ky", "text": "ЖООПТУУ БӨЛҮМ", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ky_stamp_013", "language_mix": "ky", "text": "КУПУЯ ЭМЕС", "style": "rectangular_stamp", "recommended_effect_profiles": ["photocopy"]}
+{"id": "ky_stamp_014", "language_mix": "ky", "text": "КОЛ КОЮЛДУ", "style": "received_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ky_stamp_015", "language_mix": "ky", "text": "ЭСЕПКЕ АЛЫНДЫ", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped", "photocopy"]}
+{"id": "ru_kk_stamp_001", "language_mix": "ru_kk", "text": "ҚАБЫЛДАНДЫ / ПРИНЯТО", "style": "received_stamp", "recommended_effect_profiles": ["official_stamped", "photocopy"]}
+{"id": "ru_kk_stamp_002", "language_mix": "ru_kk", "text": "ҚЫЗМЕТТІК / СЛУЖЕБНО", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ru_kk_stamp_003", "language_mix": "ru_kk", "text": "ТЕКСЕРІЛДІ / ПРОВЕРЕНО", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped", "photocopy"]}
+{"id": "ru_kk_stamp_004", "language_mix": "ru_kk", "text": "КӨШІРМЕ / КОПИЯ", "style": "faint_copy_mark", "recommended_effect_profiles": ["photocopy", "old_paper"]}
+{"id": "ru_kk_stamp_005", "language_mix": "ru_kk", "text": "РЕСМИ ҚҰЖАТ / ОФИЦИАЛЬНО", "style": "round_seal", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ru_kk_stamp_006", "language_mix": "ru_kk", "text": "ТІРКЕЛДІ / ЗАРЕГИСТРИРОВАНО", "style": "received_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ru_kk_stamp_007", "language_mix": "ru_kk", "text": "ОҚУ БӨЛІМІ / УЧЕБНЫЙ ОТДЕЛ", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ru_kk_stamp_008", "language_mix": "ru_kk", "text": "ҚАРАЛДЫ / РАССМОТРЕНО", "style": "received_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ru_kk_stamp_009", "language_mix": "ru_kk", "text": "БЕКІТІЛДІ / УТВЕРЖДЕНО", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ru_kk_stamp_010", "language_mix": "ru_kk", "text": "МҰРАҒАТ / АРХИВ", "style": "round_seal", "recommended_effect_profiles": ["old_paper"]}
+{"id": "ru_kk_stamp_011", "language_mix": "ru_kk", "text": "ҚОЛ ҚОЙЫЛДЫ / ПОДПИСАНО", "style": "received_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ru_kk_stamp_012", "language_mix": "ru_kk", "text": "ЖАУАПТЫ БӨЛІМ / ОТВЕТСТВЕННЫЙ ОТДЕЛ", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ru_kk_stamp_013", "language_mix": "ru_kk", "text": "ҚҰПИЯ ЕМЕС / НЕ СЕКРЕТНО", "style": "rectangular_stamp", "recommended_effect_profiles": ["photocopy"]}
+{"id": "ru_kk_stamp_014", "language_mix": "ru_kk", "text": "ЕСЕПКЕ АЛЫНДЫ / УЧТЕНО", "style": "received_stamp", "recommended_effect_profiles": ["official_stamped", "photocopy"]}
+{"id": "ru_kk_stamp_015", "language_mix": "ru_kk", "text": "ӘКІМШІЛІК / АДМИНИСТРАЦИЯ", "style": "round_seal", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ru_ky_stamp_001", "language_mix": "ru_ky", "text": "КАБЫЛ АЛЫНДЫ / ПРИНЯТО", "style": "received_stamp", "recommended_effect_profiles": ["official_stamped", "photocopy"]}
+{"id": "ru_ky_stamp_002", "language_mix": "ru_ky", "text": "КЫЗМАТТЫК / СЛУЖЕБНО", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ru_ky_stamp_003", "language_mix": "ru_ky", "text": "ТЕКШЕРИЛДИ / ПРОВЕРЕНО", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped", "photocopy"]}
+{"id": "ru_ky_stamp_004", "language_mix": "ru_ky", "text": "КӨЧҮРМӨ / КОПИЯ", "style": "faint_copy_mark", "recommended_effect_profiles": ["photocopy", "old_paper"]}
+{"id": "ru_ky_stamp_005", "language_mix": "ru_ky", "text": "РАСМИЙ ДОКУМЕНТ / ОФИЦИАЛЬНО", "style": "round_seal", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ru_ky_stamp_006", "language_mix": "ru_ky", "text": "КАТТАЛДЫ / ЗАРЕГИСТРИРОВАНО", "style": "received_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ru_ky_stamp_007", "language_mix": "ru_ky", "text": "ОКУУ БӨЛҮМҮ / УЧЕБНЫЙ ОТДЕЛ", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ru_ky_stamp_008", "language_mix": "ru_ky", "text": "КАРАЛДЫ / РАССМОТРЕНО", "style": "received_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ru_ky_stamp_009", "language_mix": "ru_ky", "text": "БЕКИТИЛДИ / УТВЕРЖДЕНО", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ru_ky_stamp_010", "language_mix": "ru_ky", "text": "АРХИВ / АРХИВ", "style": "round_seal", "recommended_effect_profiles": ["old_paper"]}
+{"id": "ru_ky_stamp_011", "language_mix": "ru_ky", "text": "КОЛ КОЮЛДУ / ПОДПИСАНО", "style": "received_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ru_ky_stamp_012", "language_mix": "ru_ky", "text": "ЖООПТУУ БӨЛҮМ / ОТВЕТСТВЕННЫЙ ОТДЕЛ", "style": "rectangular_stamp", "recommended_effect_profiles": ["official_stamped"]}
+{"id": "ru_ky_stamp_013", "language_mix": "ru_ky", "text": "КУПУЯ ЭМЕС / НЕ СЕКРЕТНО", "style": "rectangular_stamp", "recommended_effect_profiles": ["photocopy"]}
+{"id": "ru_ky_stamp_014", "language_mix": "ru_ky", "text": "ЭСЕПКЕ АЛЫНДЫ / УЧТЕНО", "style": "received_stamp", "recommended_effect_profiles": ["official_stamped", "photocopy"]}
+{"id": "ru_ky_stamp_015", "language_mix": "ru_ky", "text": "АДМИНИСТРАЦИЯ / АДМИНИСТРАЦИЯ", "style": "round_seal", "recommended_effect_profiles": ["official_stamped"]}

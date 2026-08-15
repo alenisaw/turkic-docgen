@@ -1,0 +1,59 @@
+name: TurkicDocGen CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  python-tests:
+    name: python-tests (ubuntu-latest, python-3.10)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install package
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Build and install Rust bindings
+        run: |
+          python -m pip install maturin
+          python -m pip install -e crates/turkicdocgen-py/
+      - name: Verify import of Rust bindings
+        run: python -c "import turkicdocgen._rustcore as rc; print(rc.__file__)"
+      - name: Ruff
+        run: python -m ruff check . --config src/turkicdocgen/configs/project/ruff.toml
+      - name: Tests
+        run: python -m pytest tests -v --tb=short -c src/turkicdocgen/configs/project/pytest.ini
+
+  rust-tests:
+    name: rust-tests (ubuntu-latest)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - name: Fetch Rust dependencies
+        run: |
+          for attempt in 1 2 3; do
+            cargo fetch --locked && break
+            if [ "$attempt" = "3" ]; then
+              exit 1
+            fi
+            sleep $((attempt * 10))
+          done
+      - name: Format
+        run: cargo fmt --check
+      - name: Clippy
+        run: cargo clippy --workspace -- -D warnings
+      - name: Test
+        run: cargo test --workspace

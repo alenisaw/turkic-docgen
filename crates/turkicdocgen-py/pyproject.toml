@@ -1,0 +1,15 @@
+[build-system]
+requires = ["maturin>=1.7,<2"]
+build-backend = "maturin"
+
+[project]
+name = "turkicdocgen-rustcore"
+version = "0.1.0"
+description = "PyO3 bindings for TurkicDocGen Rust utilities."
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+
+[tool.maturin]
+module-name = "turkicdocgen._rustcore"
+python-source = "../../src"
+features = ["pyo3/extension-module"]

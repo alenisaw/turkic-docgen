@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+{% block title %}{{ sample_id }} - TurkicDocGen{% endblock %}
+{% block content %}
+{% set groups = row.get('metadata_groups', {}) %}
+<header class="page-heading detail-heading">
+  <div>
+    <nav class="breadcrumbs"><a href="/gallery">{{ t(request, 'gallery') }}</a><span>/</span><a href="/runs/{{ run_id }}/gallery?output_base={{ output_base }}">{{ run_id }}</a><span>/</span><span>{{ sample_id }}</span></nav>
+    <h1 class="mono">{{ sample_id }}</h1>
+    <div class="inline-statuses">
+      <span id="visual-qa-status-badge" class="status status-{{ row.get('visual_qa_status', 'accepted' if row.get('qa_ok') else 'rejected') }}">{{ row.get('visual_qa_status', 'accepted' if row.get('qa_ok') else 'rejected') }}</span>
+      <span>{{ row.get('language_mix', '-') }}</span><span>{{ row.get('layout_id', '-') }}</span><span>{{ row.get('effect_profile') or row.get('quality_profile', '-') }}</span>{% if row.get('has_stamp') %}<span>{{ t(request, 'stamp') }}</span>{% endif %}
+    </div>
+  </div>
+  <div class="detail-nav">
+    {% if prev_sample_id %}<a class="icon-button" id="nav-prev-btn" href="/runs/{{ run_id }}/sample/{{ prev_sample_id }}?output_base={{ output_base }}" aria-label="{{ t(request, 'prev') }}"><svg class="icon"><use href="/static/icons.svg#chevron-left"></use></svg></a>{% endif %}
+    <span>{{ current_idx + 1 }} / {{ total_samples }}</span>
+    {% if next_sample_id %}<a class="icon-button" id="nav-next-btn" href="/runs/{{ run_id }}/sample/{{ next_sample_id }}?output_base={{ output_base }}" aria-label="{{ t(request, 'next') }}"><svg class="icon"><use href="/static/icons.svg#chevron-right"></use></svg></a>{% endif %}
+  </div>
+</header>
+
+<div class="inspector-layout">
+  <section class="image-inspector">
+    <div class="image-toolbar">
+      <button class="button compact secondary" id="zone-overlay-toggle" type="button"><svg class="icon"><use href="/static/icons.svg#eye"></use></svg><span>{{ t(request, 'hide_zones') }}</span></button>
+      <button class="button compact secondary" id="controls-drawer-toggle" type="button"><svg class="icon"><use href="/static/icons.svg#filter"></use></svg><span>{{ t(request, 'settings') or 'Настройки' }}</span></button>
+      <label class="zoom-control"><span>{{ t(request, 'zoom') }}</span><input id="image-zoom" type="range" min="50" max="300" value="100" step="10"></label>
+      <a class="icon-button" href="/image?path={{ run_dir }}/{{ row.get('image', '') }}" target="_blank" aria-label="{{ t(request, 'open') }}"><svg class="icon"><use href="/static/icons.svg#image"></use></svg></a>
+    </div>
+
+    <!-- Inspector Controls Drawer -->
+    <div id="inspector-controls-drawer" class="inspector-controls" style="display: flex; flex-direction: column; gap: 8px; padding: 12px; border-bottom: 1px solid var(--border); background: var(--surface-subtle);">
+      <!-- Row 1: Layers Checkboxes -->
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+        <span style="font-weight: 650; font-size: 0.75rem; color: var(--muted);">{{ t(request, 'inspector_layers') }}:</span>
+        <label style="display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; cursor: pointer;">
+          <input type="checkbox" id="layer-zones" checked style="width:14px; min-height:auto;">
+          {{ t(request, 'layer_zones') }}
+        </label>
+        <label style="display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; cursor: pointer;">
+          <input type="checkbox" id="layer-lines" checked style="width:14px; min-height:auto;">
+          {{ t(request, 'layer_lines') }}
+        </label>
+        <label style="display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; cursor: pointer;">
+          <input type="checkbox" id="layer-cells" checked style="width:14px; min-height:auto;">
+          {{ t(request, 'layer_cells') }}
+        </label>
+        <label style="display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; cursor: pointer;">
+          <input type="checkbox" id="layer-reading-order" style="width:14px; min-height:auto;">
+          {{ t(request, 'layer_reading_order') }}
+        </label>
+        <label style="display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; cursor: pointer;">
+          <input type="checkbox" id="layer-qa-issues" checked style="width:14px; min-height:auto;">
+          {{ t(request, 'layer_qa_issues') }}
+        </label>
+        <label style="display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; cursor: pointer;">
+          <input type="checkbox" id="layer-decorations" checked style="width:14px; min-height:auto;">
+          {{ t(request, 'layer_decorations') }}
+        </label>
+      </div>
+
+      <!-- Row 2: Settings and Filters -->
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem;">
+          <span style="font-weight: 650; color: var(--muted);">{{ t(request, 'label_mode') }}:</span>
+          <select id="label-mode-select" style="min-height: 28px; width: auto; padding: 2px 6px; font-size: 0.75rem;">
+            <option value="number">{{ t(request, 'label_number') }}</option>
+            <option value="role">{{ t(request, 'label_role') }}</option>
+            <option value="id">{{ t(request, 'label_id') }}</option>
+            <option value="none">{{ t(request, 'label_none') }}</option>
+          </select>
+        </label>
+
+        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem;">
+          <span style="font-weight: 650; color: var(--muted);">{{ t(request, 'filter_role') }}:</span>
+          <select id="role-filter-select" style="min-height: 28px; width: auto; padding: 2px 6px; font-size: 0.75rem;">
+            <option value="all">{{ t(request, 'all_roles') }}</option>
+          </select>
+        </label>
+
+        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem; flex: 1; min-width: 140px; max-width: 200px;">
+          <span style="font-weight: 650; color: var(--muted);">{{ t(request, 'opacity') }}:</span>
+          <input type="range" id="layer-opacity" min="5" max="95" value="25" step="5" style="min-height: auto; padding: 0;">
+        </label>
+
+        <label style="display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; cursor: pointer;">
+          <input type="checkbox" id="show-only-problems" style="width:14px; min-height:auto;">
+          <span style="font-weight: 650; color: var(--muted);">{{ t(request, 'show_only_problems') }}</span>
+        </label>
+      </div>
+
+      <!-- Row 3: Navigation info -->
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+        <button type="button" id="btn-fit-page" class="button compact secondary" style="min-height:26px; padding: 2px 8px; font-size: 0.7rem;">
+          {{ t(request, 'fit_page') }}
+        </button>
+        <button type="button" id="btn-fit-width" class="button compact secondary" style="min-height:26px; padding: 2px 8px; font-size: 0.7rem;">
+          {{ t(request, 'fit_width') }}
+        </button>
+        <button type="button" id="btn-reset-view" class="button compact secondary" style="min-height:26px; padding: 2px 8px; font-size: 0.7rem;">
+          {{ t(request, 'reset_view') }}
+        </button>
+        <span style="font-size: 0.7rem; color: var(--muted); margin-left: auto;">
+          {{ t(request, 'keyboard_nav_hint') or 'Навигация: [ и ] (порядок чтения), Esc (сброс)' }}
+        </span>
+      </div>
+    </div>
+
+    <div class="sample-img-container">
+      {% if row.get('image') %}
+      <img id="sample-main-img" class="sample-img" src="/image?path={{ run_dir }}/{{ row.get('image', '') }}" alt="Документ {{ sample_id }}" width="{{ 2339 if row.get('orientation') == 'landscape' else 1654 }}" height="{{ 1654 if row.get('orientation') == 'landscape' else 2339 }}">
+      <canvas id="zone-overlay-canvas"></canvas>
+      {% else %}<div class="empty-state">{{ t(request, 'no_image_available') }}</div>{% endif %}
+    </div>
+  </section>
+
+  <aside class="metadata-inspector">
+    <div class="tabs" role="tablist" aria-label="{{ t(request, 'metadata') }}">
+      {% for tab, label in [('overview', t(request, 'overview')), ('zones', t(request, 'zone_ground_truth')), ('effects', t(request, 'effect_chain')), ('fonts', t(request, 'fonts')), ('raw', t(request, 'raw'))] %}
+      <button type="button" role="tab" data-tab="{{ tab }}" aria-selected="{{ 'true' if loop.first else 'false' }}">{{ label }}</button>
+      {% endfor %}
+    </div>
+    <div class="tab-panel" data-tab-panel="overview">
+      {% for group_name in ['identity', 'generation', 'language', 'layout', 'corpus', 'render', 'qa', 'review', 'release'] %}
+      {% set values = groups.get(group_name, {}) %}
+      <section class="metadata-group"><h2>{{ group_name }}</h2><dl>{% for key, value in values.items() %}<div><dt>{{ key }}</dt><dd>{{ value | tojson if value is mapping or value is sequence and value is not string else value }}</dd></div>{% endfor %}</dl></section>
+      {% endfor %}
+    </div>
+    <div class="tab-panel hidden" data-tab-panel="zones">
+      <!-- Zone Statistics -->
+      {% if zone_stats %}
+      <div class="zone-stats-container" style="display: flex; gap: 8px; justify-content: space-between; margin-bottom: 16px; padding: 10px; background: var(--surface-subtle); border: 1px solid var(--border); border-radius: 4px;">
+        <div style="text-align: center; flex: 1;">
+          <div style="font-size: 0.75rem; color: var(--muted); font-weight: bold; text-transform: uppercase;">{{ t(request, 'received') or 'Received' }}</div>
+          <div style="font-size: 1.2rem; font-weight: bold;" id="zone-stat-received">{{ zone_stats.received }}</div>
+        </div>
+        <div style="text-align: center; flex: 1; border-left: 1px solid var(--border);">
+          <div style="font-size: 0.75rem; color: var(--success); font-weight: bold; text-transform: uppercase;">{{ t(request, 'valid') or 'Valid' }}</div>
+          <div style="font-size: 1.2rem; font-weight: bold; color: var(--success);" id="zone-stat-valid">{{ zone_stats.valid }}</div>
+        </div>
+        <div style="text-align: center; flex: 1; border-left: 1px solid var(--border);">
+          <div style="font-size: 0.75rem; color: var(--danger); font-weight: bold; text-transform: uppercase;">{{ t(request, 'rejected') or 'Rejected' }}</div>
+          <div style="font-size: 1.2rem; font-weight: bold; color: var(--danger);" id="zone-stat-rejected">{{ zone_stats.rejected }}</div>
+        </div>
+        <div style="text-align: center; flex: 1; border-left: 1px solid var(--border);">
+          <div style="font-size: 0.75rem; color: var(--accent); font-weight: bold; text-transform: uppercase;">{{ t(request, 'drawable') or 'Drawable' }}</div>
+          <div style="font-size: 1.2rem; font-weight: bold; color: var(--accent);" id="zone-stat-drawable">{{ zone_stats.drawable }}</div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Selected Zone Properties Panel -->
+      <section id="selected-zone-properties" class="metadata-group hidden" style="margin-bottom: 16px; border: 2px solid var(--accent); background: var(--accent-soft);">
+        <h2 style="display: flex; justify-content: space-between; align-items: center; background: var(--accent); color: white; margin: 0; padding: 8px 10px;">
+          <span>{{ t(request, 'zone_properties') or 'Свойства зоны' }}</span>
+          <button id="clear-selection-btn" type="button" class="button compact ghost" style="color: white; border: 0; padding: 0 4px; min-height: auto;"><svg class="icon" style="width:14px; height:14px;"><use href="/static/icons.svg#x"></use></svg></button>
+        </h2>
+        <div class="properties-content" style="padding: 12px; font-size: 0.8rem; display: flex; flex-direction: column; gap: 8px; max-height: 400px; overflow-y: auto;">
+          <!-- Will be filled by JavaScript -->
+        </div>
+      </section>
+
+      <!-- Zone List -->
+      <div class="zone-list">
+        {% for zone in zone_gt %}
+        <article class="zone-item{% if not zone.get('drawable', true) %} zone-item-rejected{% endif %}" data-zone-id="{{ zone.get('zone_id') }}" data-zone-index="{{ loop.index0 }}" style="cursor: pointer; transition: all 0.2s;">
+          <header style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8125rem;">
+            <strong>{{ zone.get('zone_id') }}</strong>
+            <span class="zone-role-badge status" style="background: var(--surface-subtle); color: var(--text);">{{ zone.get('role') or zone.get('zone_type') }}</span>
+          </header>
+          {% if not zone.get('drawable', true) %}
+          <div class="status status-rejected" style="margin-top: 6px;">Invalid geometry: not drawn</div>
+          {% endif %}
+          <p class="zone-text-preview" style="font-size: 0.8rem; line-height: 1.3; margin: 6px 0;">{{ zone.get('text', '')[:160] }}{% if zone.get('text', '')|length > 160 %}...{% endif %}</p>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+            <code style="font-size: 0.65rem; color: var(--muted);">Order: {{ zone.get('reading_order') }}</code>
+            {% if zone.get('qa_issues') %}
+            <span class="status status-rejected" style="padding: 1px 4px; font-size: 0.65rem;">QA: {{ zone.get('qa_issues')|length }}</span>
+            {% endif %}
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="tab-panel hidden" data-tab-panel="effects"><pre>{{ groups.get('effects', {}) | tojson(indent=2) }}</pre></div>
+    <div class="tab-panel hidden" data-tab-panel="fonts"><pre>{{ groups.get('fonts', {}) | tojson(indent=2) }}</pre></div>
+    <div class="tab-panel hidden" data-tab-panel="raw"><pre>{{ row | tojson(indent=2) }}</pre></div>
+    <div class="review-bar">
+      <textarea id="visual-qa-note" rows="2" placeholder="{{ t(request, 'reviewer_note') }}"></textarea>
+      <div class="review-actions">
+        {% for status, label in [('accepted', t(request, 'accept')), ('rejected', t(request, 'reject')), ('flagged', t(request, 'flag')), ('pending_manual', t(request, 'reset'))] %}
+        <button class="button compact {% if status == 'rejected' %}danger{% else %}secondary{% endif %}" type="button" data-visual-qa-btn="{{ status }}" data-sample-id="{{ sample_id }}" data-run-id="{{ run_id }}" data-output-base="{{ output_base }}">{{ label }}</button>
+        {% endfor %}
+      </div>
+    </div>
+  </aside>
+</div>
+
+<script id="zone-data" type="application/json">
+  {{ zone_gt | tojson }}
+</script>
+{% endblock %}

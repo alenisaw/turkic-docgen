@@ -1,0 +1,26 @@
+# Target effect profiles. Merge into existing config design.
+effect_profiles:
+  clean:
+    description: Minimal degradation for baseline OCR.
+  office_scan:
+    description: Light scanner noise, safe contrast, mild JPEG.
+  low_dpi_scan:
+    description: Downsample/upsample simulation with limited blur.
+  photocopy:
+    description: Contrast shifts, streaks, speckles, light dirt.
+  phone_photo:
+    description: Mild perspective, shadow, rotation, JPEG.
+  old_paper:
+    description: Aged tone, stains, uneven background, edge shadow.
+  official_stamped:
+    description: Language-aware stamps, signatures, pen marks, safe overlays.
+required_metadata:
+  - effect_profile
+  - effect_chain
+  - exact_parameters
+  - seed
+qa_rules:
+  max_text_coverage_by_stamps: 0.12
+  max_total_visual_damage_coverage: 0.22
+  reject_if_zone_polygon_invalid_after_transform: true
+  store_effect_chain_in_manifest: true

@@ -1,0 +1,3 @@
+language: ky
+script: Cyrillic
+special_chars: "ҢңӨөҮү"

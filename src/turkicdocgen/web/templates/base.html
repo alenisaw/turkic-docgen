@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="{{ get_lang(request) }}" data-theme="{{ get_theme(request) }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ t(request, 'tdg_title') }}{% endblock %}</title>
+  <link rel="icon" type="image/png" href="/static/logo.png">
+  <link rel="apple-touch-icon" href="/static/logo.png">
+  <script src="/static/theme.js"></script>
+  <link rel="stylesheet" href="/static/panel.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">К содержимому</a>
+  <header class="app-header">
+    <a class="brand" href="/gallery" aria-label="TurkicDocGen">
+      <img class="brand-logo" src="/static/logo.png" alt="">
+      <span>TurkicDocGen</span>
+    </a>
+    <nav class="primary-nav" aria-label="Основная навигация">
+      <a href="/gallery" {% if request.url.path == '/gallery' or (request.url.path.startswith('/runs/') and request.url.path.endswith('/gallery')) %}aria-current="page"{% endif %}>{{ t(request, 'gallery') }}</a>
+      <a href="/generate" {% if request.url.path == '/generate' %}aria-current="page"{% endif %}>{{ t(request, 'generate') }}</a>
+    </nav>
+    <button class="icon-button mobile-nav-toggle" type="button" data-mobile-nav aria-expanded="false" aria-label="Открыть навигацию">
+      <svg class="icon"><use href="/static/icons.svg#menu"></use></svg>
+    </button>
+    <div class="header-actions">
+      <div class="segmented" aria-label="Язык интерфейса">
+        <button type="button" data-language="ru" aria-pressed="{{ 'true' if get_lang(request) == 'ru' else 'false' }}">RU</button>
+        <button type="button" data-language="en" aria-pressed="{{ 'true' if get_lang(request) == 'en' else 'false' }}">EN</button>
+      </div>
+      <button class="icon-button" id="theme-toggle" type="button" aria-label="Переключить тему">
+        <svg class="icon"><use href="/static/icons.svg#sun-moon"></use></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="page-shell" id="main-content" tabindex="-1">
+    {% block content %}{% endblock %}
+  </main>
+
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <div id="delete-modal" class="modal-overlay hidden" role="presentation">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title" tabindex="-1">
+      <header class="modal-header">
+        <h2 id="delete-modal-title">{{ t(request, 'delete_run_title') }}</h2>
+        <button class="icon-button" type="button" data-close-modal aria-label="{{ t(request, 'cancel_btn') }}">
+          <svg class="icon"><use href="/static/icons.svg#x"></use></svg>
+        </button>
+      </header>
+      <div class="modal-body">
+        <p>{{ t(request, 'confirm_delete') }} <strong id="delete-target-name"></strong></p>
+        <label class="choice-row">
+          <input type="radio" name="delete_type" value="soft" checked>
+          <span><strong>{{ t(request, 'soft_delete') }}</strong><small>{{ t(request, 'soft_delete_desc') }}</small></span>
+        </label>
+        <label class="choice-row danger">
+          <input type="radio" name="delete_type" value="hard">
+          <span><strong>{{ t(request, 'hard_delete') }}</strong><small>{{ t(request, 'hard_delete_desc') }}</small></span>
+        </label>
+      </div>
+      <footer class="modal-footer">
+        <button class="button secondary" type="button" data-close-modal>{{ t(request, 'cancel_btn') }}</button>
+        <button id="delete-confirm-btn" class="button danger" type="button">{{ t(request, 'delete') }}</button>
+      </footer>
+    </section>
+  </div>
+
+  <script src="/static/panel.js" defer></script>
+</body>
+</html>

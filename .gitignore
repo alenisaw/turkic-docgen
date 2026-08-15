@@ -1,0 +1,112 @@
+# Python caches / build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.cache/
+.mypy_cache/
+.pyre/
+.coverage
+coverage.xml
+htmlcov/
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Local env / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+*.token
+
+# Generated datasets / outputs
+release/**
+reports/**
+graphify-out/
+outputs/**
+runs/**
+artifacts/**
+galleries/**
+metadata.parquet
+manifest.jsonl
+rejected_samples.jsonl
+*.parquet
+*.arrow
+*.jsonl
+!data/registry/template_patterns.jsonl
+!data/corpus/seed_records.jsonl
+!data/corpus/stamp_phrases.jsonl
+
+# Generated media / heavy local files
+*.pdf
+*.png
+!docs/
+!docs/**
+!src/turkicdocgen/web/static/logo.png
+*.jpg
+*.jpeg
+*.webp
+*.tif
+*.tiff
+*.zip
+*.rar
+*.7z
+*.tar
+*.tar.gz
+
+# Models / checkpoints
+models/**
+checkpoints/**
+wandb/
+mlruns/
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.onnx
+
+# Local agent memory / private guides
+.agent/
+HOW_TO_USE.md
+PACK_CONTENTS.md
+PROMPT_FOR_CODEX.md
+COMMAND_LINE_GUIDE.md
+*_COMMANDS.md
+*_GUIDE.md
+LOCAL_*.md
+
+# Rust build artifacts
+/target/
+**/target/
+*.so
+*.pyd
+*.dll
+*.dylib
+
+# Notebooks / editor / OS
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs / temporary files
+logs/
+*.log
+*.tmp
+*.temp
+.tmp/
+tmp/
+
+docs/_build/

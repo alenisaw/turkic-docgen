@@ -1,0 +1,13 @@
+target-version = "py310"
+
+[lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
+
+[lint.per-file-ignores]
+# Typer commands and the compatibility-facing dataset API intentionally expose
+# explicit parameters; hiding them behind *args/**kwargs breaks runtime typing.
+"src/turkicdocgen/cli.py" = ["PLR0913"]
+"src/turkicdocgen/dataset.py" = ["PLR0913", "TC003"]
+"src/turkicdocgen/page_planning/planner.py" = ["PLR0913"]
+"src/turkicdocgen/render/effects/stamps.py" = ["PLR0913"]

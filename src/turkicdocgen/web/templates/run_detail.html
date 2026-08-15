@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}{{ t(request, 'run_details') }} {{ run_id }} - TurkicDocGen Panel{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div class="breadcrumb">
+    <a href="/">{{ t(request, 'gallery') }}</a> / <span class="mono">{{ run_id }}</span>
+  </div>
+  <h1 class="page-title mono">{{ run_id }}</h1>
+  <p class="page-subtitle">{{ run_dir }}</p>
+</div>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-icon">{{ t(request, 'all_abbr') }}</div>
+    <div class="stat-value">{{ total }}</div>
+    <div class="stat-label">{{ t(request, 'samples') }}</div>
+  </div>
+  <div class="stat-card stat-success">
+    <div class="stat-icon">{{ t(request, 'ok_abbr') }}</div>
+    <div class="stat-value">{{ accepted_count }}</div>
+    <div class="stat-label">{{ t(request, 'qa_accepted') }}</div>
+  </div>
+  <div class="stat-card stat-warning">
+    <div class="stat-icon">{{ t(request, 'no_abbr') }}</div>
+    <div class="stat-value">{{ rejected_count }}</div>
+    <div class="stat-label">{{ t(request, 'qa_rejected') }}</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon">{{ t(request, 'qa_abbr') }}</div>
+    <div class="stat-value">{{ '%.0f'|format(accepted_count / total * 100 if total else 0) }}%</div>
+    <div class="stat-label">{{ t(request, 'accept_rate') }}</div>
+  </div>
+</div>
+
+<div class="card-row">
+  <a href="/runs/{{ run_id }}/gallery?output_base={{ output_base }}" class="action-card">
+    <div class="action-icon">{{ t(request, 'img_abbr') }}</div>
+    <div class="action-title">{{ t(request, 'gallery') }}</div>
+    <div class="action-desc">{{ t(request, 'browse_images_desc') }}</div>
+  </a>
+  <a href="/runs/{{ run_id }}/rejected?output_base={{ output_base }}" class="action-card action-danger">
+    <div class="action-icon">{{ t(request, 'qa_abbr') }}</div>
+    <div class="action-title">{{ t(request, 'rejected') }}</div>
+    <div class="action-desc">{{ t(request, 'view_rejected_desc') }}</div>
+  </a>
+  <a href="#" class="action-card action-danger" onclick="openDeleteModal('{{ run_id }}', '{{ output_base }}'); return false;">
+    <div class="action-icon">{{ t(request, 'del_abbr') }}</div>
+    <div class="action-title">{{ t(request, 'delete') }}</div>
+    <div class="action-desc">{{ t(request, 'delete_purge_desc') }}</div>
+  </a>
+</div>
+
+{% if rows %}
+<div class="card mt-4">
+  <div class="card-header">
+    <h2 class="card-title">{{ t(request, 'manifest_records') }}</h2>
+    <span class="badge badge-neutral">{{ rows|length }} {{ t(request, 'rows_count') }}</span>
+    {% if bounded and index_status and not index_status.ready %}
+    <span class="badge badge-neutral">{{ index_status.message }}</span>
+    {% endif %}
+  </div>
+  <div class="card-body no-pad">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>{{ t(request, 'language') }}</th>
+          <th>{{ t(request, 'profile') }}</th>
+          <th>{{ t(request, 'qa_status') }}</th>
+          <th>{{ t(request, 'actions') }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in rows[:50] %}
+        <tr>
+          <td class="mono small">{{ row.get('id', '')[:16] }}...</td>
+          <td><span class="lang-badge">{{ row.get('language_mix', '-') }}</span></td>
+          <td class="small">{{ row.get('layout_id', '-') }}</td>
+          <td>
+            <span class="status-badge status-{{ 'accepted' if row.get('qa_ok') else 'rejected' }}">
+              {{ t(request, 'accepted') if row.get('qa_ok') else t(request, 'rejected') }}
+            </span>
+          </td>
+          <td>
+            <a href="/runs/{{ run_id }}/sample/{{ row.get('id', '') }}?output_base={{ output_base }}" class="btn btn-sm btn-ghost">{{ t(request, 'detail') }}</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% if total > 50 %}
+    <div class="table-footer">{{ t(request, 'showing_50_of').format(total=total) }} - <a href="/runs/{{ run_id }}/gallery?output_base={{ output_base }}">{{ t(request, 'gallery') }}</a></div>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+{% endblock %}

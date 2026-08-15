@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}{{ t(request, 'rejected_samples') }} - {{ run_id }} - TurkicDocGen Panel{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div class="breadcrumb">
+    <a href="/">{{ t(request, 'gallery') }}</a> / <a href="/runs/{{ run_id }}">{{ run_id }}</a> / {{ t(request, 'rejected') }}
+  </div>
+  <h1 class="page-title">{{ t(request, 'rejected_samples') }}</h1>
+  <p class="page-subtitle">{{ total }} {{ t(request, 'rejected') }} - <a href="/runs/{{ run_id }}/gallery?output_base={{ output_base }}">{{ t(request, 'back_to_gallery') }}</a></p>
+  {% if bounded and index_status and not index_status.ready %}
+  <p class="status status-idle">{{ index_status.message }}</p>
+  {% endif %}
+</div>
+
+<!-- Filter bar -->
+<div class="filter-bar">
+  <div class="filter-form">
+    <label class="form-label" style="margin: 0;">{{ t(request, 'reason_filter') }}:</label>
+    <select id="reason-filter" class="form-select sm" style="width: 260px;" onchange="filterByReason(this.value)">
+      <option value="">{{ t(request, 'all_reasons') }}</option>
+      {% for reason in reason_types %}
+      <option value="{{ reason }}" {% if selected_reason == reason %}selected{% endif %}>{{ reason }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <span class="badge badge-neutral">{{ rejected_rows | length }} {{ t(request, 'shown') }}</span>
+</div>
+
+{% if not rejected_rows %}
+<div class="empty-card">
+  <div class="empty-icon">{{ t(request, 'ok_abbr') }}</div>
+  <div class="empty-title">{{ t(request, 'no_rejected_samples_title') }}</div>
+  <div class="empty-text">{{ t(request, 'no_rejected_samples') }}</div>
+</div>
+{% else %}
+
+<div class="rejected-list">
+  {% for row in rejected_rows %}
+  <div class="rejected-card" data-reasons="{{ row.get('qa_issues', []) | join(',') }}">
+    <div class="rejected-card-img">
+      {% if row.get('image') %}
+      <a href="/runs/{{ run_id }}/sample/{{ row.get('id', row.get('sample_id', '')) }}?output_base={{ output_base }}">
+        <img class="rejected-thumb"
+             src="/thumb?path={{ run_dir }}/{{ row.get('image', '') }}&w=360"
+             alt="{{ t(request, 'rejected_samples') }}"
+             onerror="this.src='/static/no-image.svg'; this.classList.add('img-error')">
+      </a>
+      {% else %}
+      <div class="rejected-no-img">{{ t(request, 'no_image') }}</div>
+      {% endif %}
+    </div>
+    <div class="rejected-card-body">
+      <div class="rejected-id mono small">{{ row.get('id', row.get('sample_id', '-'))[:32] }}</div>
+      <div class="rejected-badges">
+        <span class="status-badge status-rejected">{{ t(request, 'rejected') }}</span>
+        <span class="lang-badge sm">{{ row.get('language_mix', '-') }}</span>
+        {% if row.get('layout_id') %}
+        <span class="profile-badge sm">{{ row.get('layout_id') }}</span>
+        {% endif %}
+      </div>
+      <div class="rejected-reasons">
+        {% for reason in row.get('qa_issues', []) %}
+        <div class="reject-reason-chip">
+          <span class="reject-reason-icon">!</span>
+          <span class="small">{{ reason }}</span>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="rejected-meta small">
+        <span class="text-muted">{{ row.get('layout_id', '') }}</span>
+        {% if row.get('quality_profile') %}<span class="text-muted"> / {{ row.get('quality_profile') }}</span>{% endif %}
+      </div>
+      <a href="/runs/{{ run_id }}/sample/{{ row.get('id', row.get('sample_id', '')) }}?output_base={{ output_base }}"
+         class="btn btn-sm btn-ghost" style="margin-top: 0.5rem;">{{ t(request, 'detail') }}</a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<nav class="pagination" aria-label="{{ t(request, 'page') }}">
+  {% set qs = 'output_base=' ~ output_base ~ '&reason_filter=' ~ selected_reason ~ '&page_size=' ~ page_size %}
+  {% if page > 1 %}<a class="icon-button" href="?page={{ page-1 }}&{{ qs }}" aria-label="{{ t(request, 'prev') }}"><svg class="icon"><use href="/static/icons.svg#chevron-left"></use></svg></a>{% endif %}
+  <span>{{ page }} / {{ total_pages }}</span>
+  {% if page < total_pages %}<a class="icon-button" href="?page={{ page+1 }}&{{ qs }}" aria-label="{{ t(request, 'next') }}"><svg class="icon"><use href="/static/icons.svg#chevron-right"></use></svg></a>{% endif %}
+</nav>
+
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+function filterByReason(value) {
+  const cards = document.querySelectorAll('.rejected-card');
+  cards.forEach(card => {
+    if (!value || card.dataset.reasons.includes(value)) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+// Apply initial filter if any
+const filter = document.getElementById('reason-filter');
+if (filter && filter.value) filterByReason(filter.value);
+</script>
+{% endblock %}

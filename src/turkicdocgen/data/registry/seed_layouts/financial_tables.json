@@ -1,0 +1,27 @@
+{
+  "seed_bank_version": "0.1",
+  "pii_policy": "metadata_only_no_real_pdf_no_real_pii",
+  "layouts": [
+    {
+      "layout_family": "invoice_grid",
+      "template_hint": "invoice-like document with party fields above a narrow item table",
+      "page_size": "a4_portrait",
+      "style": {
+        "table_family": "thin_border_invoice_table",
+        "border_weight": "thin",
+        "header_fill": "office_grayscale",
+        "stamp_zone": "footer_right"
+      }
+    },
+    {
+      "layout_family": "table_heavy",
+      "template_hint": "accounting-style act or receipt table with pale header fill",
+      "page_size": "a4_portrait",
+      "style": {
+        "table_family": "pale_green_accounting",
+        "border_weight": "thin",
+        "header_fill": "pale_green"
+      }
+    }
+  ]
+}

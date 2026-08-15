@@ -1,0 +1,241 @@
+layouts:
+  book_page_single_column:
+    share: 0.22
+    density:
+      visible_chars: [1800, 3500]
+    zones: [running_header_optional, section_title_optional, body_main, page_number]
+    rules: [left_align, no_justify, no_stamps, no_marginalia]
+
+  book_page_two_columns:
+    share: 0.13
+    density:
+      visible_chars: [1800, 3200]
+    zones: [title_optional, subtitle_optional, column_left, column_right, page_number]
+    rules: [fixed_gutter, left_align, no_justify, title_left_right_page_order]
+
+  academic_abstract_page:
+    share: 0.15
+    density:
+      visible_chars: [1400, 2500]
+    zones: [title, authors, affiliation_optional, keywords, abstract_body, optional_footer_ref]
+    rules: [metadata_separate_from_body, left_align, no_justify]
+
+  official_statement_page:
+    share: 0.15
+    rigid_template: true
+    density:
+      visible_chars: [700, 1600]
+    zones: [recipient_block_upper_right, applicant_block_upper_right, document_title_center, body_text, attachment_note_optional, date_bottom_left, signature_bottom_right]
+    rules: [left_align, no_justify, stamp_safe_zone_only]
+
+  official_letter_page:
+    share: 0.15
+    rigid_template: true
+    density:
+      visible_chars: [900, 2200]
+    zones: [org_header, document_number_date, recipient, subject_optional, body_text, signature_block, optional_stamp]
+    rules: [left_align, no_justify, stamp_must_not_cover_body]
+
+  simple_form_page:
+    share: 0.10
+    rigid_template: true
+    density:
+      filled_fields: [15, 45]
+    zones: [form_title, field_group_1, field_group_2_optional, instruction_block_optional, date_field, signature_field]
+    rules: [stable_grid, no_micro_font, no_overlap]
+
+  simple_table_page:
+    share: 0.05
+    density:
+      columns: [3, 7]
+      rows: [8, 30]
+      filled_cells: [30, 120]
+    zones: [table_title, table_main, optional_note, page_number_optional]
+    rules: [no_tiny_fonts, no_overlap]
+
+  bulletin_or_newspaper_page:
+    share: 0.05
+    density:
+      visible_chars: [1400, 3000]
+    zones: [masthead, issue_metadata, lead_story, column_left, column_right, footer_note]
+    rules: [fixed_gutter, left_align, mixed_language_allowed, no_justify]
+
+  lecture_notes_page:
+    share: 0.05
+    density:
+      visible_chars: [2800, 3800]
+    zones: [course, title, outline, notes, summary]
+    rules: [left_align, numbered_outline, summary_footer, no_stamps]
+
+  glossary_page:
+    share: 0.03
+    density:
+      visible_chars: [1800, 3200]
+    zones: [title, range, entries_left, entries_right]
+    rules: [fixed_gutter, term_definition_entries, left_align, no_justify]
+
+  dictionary_entry_page:
+    share: 0.03
+    density:
+      visible_chars: [1800, 3200]
+    zones: [title, range, entries_left, entries_right]
+    rules: [fixed_gutter, dictionary_line_breaks, left_align, no_justify]
+
+  index_page:
+    share: 0.03
+    density:
+      visible_chars: [1800, 3200]
+    zones: [title, range, entries_left, entries_right]
+    rules: [fixed_gutter, page_references, left_align, no_justify]
+
+  certificate_page:
+    share: 0.04
+    rigid_template: true
+    density:
+      visible_chars: [700, 1600]
+    zones: [organization, title, reference, recipient, body, signature, stamp_safe]
+    rules: [centered_title, centered_body, signature_bottom, stamp_safe_zone_only]
+
+  memo_page:
+    share: 0.04
+    rigid_template: true
+    density:
+      visible_chars: [900, 2200]
+    zones: [sender, recipient, title, subject, body, signature]
+    rules: [compact_header, left_align, no_justify, no_stamp]
+
+  meeting_minutes_page:
+    share: 0.04
+    rigid_template: true
+    density:
+      visible_chars: [900, 2200]
+    zones: [organization, title, meeting_metadata, participants, agenda, decisions, signature]
+    rules: [sectioned_body, dual_signature, left_align, no_justify]
+
+  archival_notice_page:
+    share: 0.04
+    rigid_template: true
+    density:
+      visible_chars: [900, 2200]
+    zones: [archive_code, title, catalog_metadata, body, archive_footer]
+    rules: [archive_reference_required, left_align, no_justify, no_signature_marks]
+
+  application_form_page:
+    share: 0.04
+    rigid_template: true
+    density:
+      filled_fields: [15, 45]
+    zones: [form_title, field_group_1, field_group_2_optional, instruction_block_optional, date_field, signature_field]
+    rules: [stable_grid, no_micro_font, no_overlap]
+
+  exam_sheet_page:
+    share: 0.03
+    rigid_template: true
+    density:
+      filled_fields: [15, 45]
+    zones: [form_title, field_group_1, field_group_2_optional, instruction_block_optional, date_field, signature_field]
+    rules: [stable_grid, no_micro_font, no_overlap]
+
+  worksheet_page:
+    share: 0.03
+    rigid_template: true
+    density:
+      filled_fields: [15, 45]
+    zones: [form_title, field_group_1, field_group_2_optional, instruction_block_optional, date_field, signature_field]
+    rules: [stable_grid, no_micro_font, no_overlap]
+
+  receipt_like_page:
+    share: 0.03
+    rigid_template: true
+    density:
+      filled_fields: [15, 45]
+    zones: [form_title, field_group_1, field_group_2_optional, instruction_block_optional, date_field, signature_field]
+    rules: [stable_grid, no_micro_font, no_overlap]
+
+  registry_extract_page:
+    share: 0.03
+    density:
+      columns: [3, 7]
+      rows: [8, 30]
+      filled_cells: [30, 120]
+    zones: [table_title, table_main, optional_note, page_number_optional]
+    rules: [no_tiny_fonts, no_overlap]
+
+  syllabus_page:
+    share: 0.03
+    density:
+      columns: [3, 7]
+      rows: [8, 30]
+      filled_cells: [30, 120]
+    zones: [table_title, table_main, optional_note, page_number_optional]
+    rules: [no_tiny_fonts, no_overlap]
+
+  catalog_entry_page:
+    share: 0.03
+    density:
+      columns: [3, 7]
+      rows: [8, 30]
+      filled_cells: [30, 120]
+    zones: [table_title, table_main, optional_note, page_number_optional]
+    rules: [no_tiny_fonts, no_overlap]
+
+  invoice_like_page:
+    share: 0.04
+    density:
+      columns: [3, 7]
+      rows: [8, 30]
+      filled_cells: [30, 120]
+    zones: [table_title, table_main, optional_note, page_number_optional]
+    rules: [no_tiny_fonts, no_overlap]
+
+  schedule_table_page:
+    share: 0.03
+    density:
+      columns: [3, 7]
+      rows: [8, 30]
+      filled_cells: [30, 120]
+    zones: [table_title, table_main, optional_note, page_number_optional]
+    rules: [no_tiny_fonts, no_overlap]
+
+  historical_newspaper_page:
+    share: 0.03
+    density:
+      visible_chars: [1400, 3000]
+    zones: [masthead, issue_metadata, column_1, column_2, column_3]
+    rules: [three_columns, fixed_gutters, mixed_language_allowed, no_justify]
+
+  exam_register_page:
+    share: 0.03
+    density:
+      columns: [3, 7]
+      rows: [8, 30]
+      filled_cells: [30, 120]
+    zones: [table_title, table_main, optional_note, page_number_optional]
+    rules: [no_tiny_fonts, no_overlap]
+
+  inventory_sheet_page:
+    share: 0.03
+    density:
+      columns: [3, 7]
+      rows: [8, 30]
+      filled_cells: [30, 120]
+    zones: [table_title, table_main, optional_note, page_number_optional]
+    rules: [no_tiny_fonts, no_overlap]
+
+  attendance_sheet_page:
+    share: 0.03
+    density:
+      columns: [3, 7]
+      rows: [8, 30]
+      filled_cells: [30, 120]
+    zones: [table_title, table_main, optional_note, page_number_optional]
+    rules: [no_tiny_fonts, no_overlap]
+
+  wide_schedule_page:
+    share: 0.03
+    density:
+      columns: [3, 7]
+      rows: [8, 30]
+      filled_cells: [30, 120]
+    zones: [table_title, table_main, optional_note, page_number_optional]
+    rules: [no_tiny_fonts, no_overlap]

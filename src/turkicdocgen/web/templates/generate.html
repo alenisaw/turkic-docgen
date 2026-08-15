@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}{{ t(request, 'generate') }} - TurkicDocGen{% endblock %}
+{% block content %}
+{% set is_ru = get_lang(request) == 'ru' %}
+<header class="page-heading">
+  <div><h1>{{ t(request, 'generate') }}</h1><p>{{ t(request, 'start_new_job') }}</p></div>
+</header>
+
+<div class="generate-layout">
+  <form class="form-panel" id="generation-form" novalidate>
+    <div class="section-heading"><h2>{{ t(request, 'job_settings') }}</h2></div>
+    <div class="form-grid">
+      <label class="field"><span>{{ t(request, 'profile') }}</span><select id="gen-profile" name="profile">{% for profile in profiles %}<option value="{{ profile }}" {% if profile == 'visual_300' %}selected{% endif %}>{{ profile }}</option>{% endfor %}</select></label>
+      <label class="field field-wide"><span>{{ t(request, 'output_dir') }}</span><input id="gen-out" name="out_dir" value="outputs/qa_run" required pattern="^(outputs|runs)[/\\][A-Za-z0-9_.-]+$"><small>{{ t(request, 'output_dir_hint') }}</small></label>
+      <label class="field"><span>{{ t(request, 'count') }}</span><input id="gen-count" name="count" type="number" value="24" min="1" max="100000" required></label>
+      <label class="field"><span>{{ t(request, 'seed') }}</span><input id="gen-seed" name="seed" type="number" value="42" required></label>
+      <label class="field"><span>{{ t(request, 'language') }}</span><select id="gen-language" name="language"><option value="">{{ t(request, 'auto') }}</option><option value="kk">kk</option><option value="ky">ky</option><option value="ru_kk">ru_kk</option><option value="ru_ky">ru_ky</option></select></label>
+      <label class="field"><span>{{ t(request, 'layout') }}</span><select id="gen-layout" name="layout"><option value="">{{ t(request, 'auto') }}</option><option>book_page_single_column</option><option>book_page_two_columns</option><option>academic_abstract_page</option><option>official_statement_page</option><option>official_letter_page</option><option>simple_form_page</option><option>simple_table_page</option><option>bulletin_or_newspaper_page</option></select></label>
+      <label class="field"><span>{{ t(request, 'effect_filter_placeholder') }}</span><select id="gen-effect" name="effect"><option value="">{{ t(request, 'auto') }}</option><option>clean</option><option>office_scan</option><option>low_dpi_scan</option><option>photocopy</option><option>phone_photo</option><option>old_paper</option><option>official_stamped</option></select></label>
+    </div>
+    <div class="command-preview">
+      <span>{{ t(request, 'command') }}</span>
+      <code id="command-preview"></code>
+    </div>
+    <div id="generation-errors" class="form-errors hidden" role="alert"></div>
+    <button class="button primary" id="gen-submit" type="submit"><svg class="icon"><use href="/static/icons.svg#play"></use></svg>{{ t(request, 'start_generation') }}</button>
+  </form>
+
+  <section class="job-panel" aria-labelledby="job-log-heading">
+    <div class="section-heading">
+      <h2 id="job-log-heading">{{ t(request, 'logs') }}</h2>
+      <span id="job-status-badge" class="status status-idle">idle</span>
+    </div>
+    <div id="job-announcer" class="sr-only" aria-live="polite"></div>
+    <div class="progress-block hidden" id="progress-section">
+      <progress id="job-progress" max="100" value="0">0%</progress>
+      <span id="progress-label">0 / 0</span>
+    </div>
+    <pre class="log-panel" id="log-panel" tabindex="0">{{ t(request, 'start_gen_logs_hint') }}</pre>
+    <button class="button danger hidden" id="cancel-job" type="button"><svg class="icon"><use href="/static/icons.svg#square"></use></svg>{{ t(request, 'cancel') }}</button>
+  </section>
+</div>
+{% endblock %}

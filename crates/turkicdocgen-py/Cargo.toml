@@ -1,0 +1,17 @@
+[package]
+name = "turkicdocgen-py"
+version = "0.1.0"
+edition = "2021"
+description = "PyO3 bindings for TurkicDocGen Rust utilities."
+license = "Apache-2.0"
+
+[lib]
+name = "turkicdocgen_rustcore"
+crate-type = ["cdylib"]
+
+[lints]
+workspace = true
+
+[dependencies]
+pyo3 = { version = "0.22", features = ["extension-module"] }
+turkicdocgen-core = { path = "../turkicdocgen-core" }

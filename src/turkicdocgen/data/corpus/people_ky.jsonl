@@ -1,0 +1,3 @@
+{"id": "ky-person-1", "language": "ky", "domain": "official", "text": "Айжан Бакыт кызы", "source_type": "curated", "source": "local", "license": "curated", "allowed_layouts": ["official_letter_page", "official_statement_page"], "tags": ["name"]}
+{"id": "ky-person-2", "language": "ky", "domain": "official", "text": "Нурлан Азамат уулу", "source_type": "curated", "source": "local", "license": "curated", "allowed_layouts": ["official_letter_page", "official_statement_page"], "tags": ["name"]}
+{"id": "ky-person-3", "language": "ky", "domain": "official", "text": "Асель Кубат кызы", "source_type": "curated", "source": "local", "license": "curated", "allowed_layouts": ["official_letter_page", "official_statement_page"], "tags": ["name"]}

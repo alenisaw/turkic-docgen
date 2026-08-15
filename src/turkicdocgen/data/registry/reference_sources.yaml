@@ -1,0 +1,2 @@
+# Layout-reference registry only. Do not copy real ground truth or PII into generated data.
+sources: []

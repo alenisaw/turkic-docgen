@@ -1,0 +1,3 @@
+{"id": "ky-dept-1", "language": "ky", "domain": "official", "text": "Документтик камсыздоо бөлүмү", "source_type": "curated", "source": "local", "license": "curated", "allowed_layouts": ["official_letter_page", "official_statement_page"], "tags": ["official"]}
+{"id": "ky-dept-2", "language": "ky", "domain": "official", "text": "Кадр кызматы", "source_type": "curated", "source": "local", "license": "curated", "allowed_layouts": ["official_letter_page", "official_statement_page"], "tags": ["official", "hr"]}
+{"id": "ky-dept-3", "language": "ky", "domain": "official", "text": "Каржы жана эсеп бөлүмү", "source_type": "curated", "source": "local", "license": "curated", "allowed_layouts": ["official_letter_page", "official_statement_page"], "tags": ["official", "finance"]}

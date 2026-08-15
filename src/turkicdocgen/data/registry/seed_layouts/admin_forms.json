@@ -1,0 +1,38 @@
+{
+  "seed_bank_version": "0.1",
+  "pii_policy": "metadata_only_no_real_pdf_no_real_pii",
+  "layouts": [
+    {
+      "layout_family": "single_column",
+      "template_hint": "administrative application with title, recipient, applicant, request body, date and signature",
+      "page_size": "a4_portrait",
+      "style": {
+        "font_family": "sans",
+        "header_weight": "medium",
+        "line_density": "normal",
+        "stamp_zone": "footer_right"
+      }
+    },
+    {
+      "layout_family": "stacked_bilingual_labels",
+      "template_hint": "bilingual labels stacked in the left column with field values aligned in the right column",
+      "page_size": "a4_portrait",
+      "style": {
+        "font_family": "sans",
+        "header_weight": "medium",
+        "line_density": "comfortable",
+        "stamp_zone": "footer_right"
+      }
+    },
+    {
+      "layout_family": "table_heavy",
+      "template_hint": "administrative table with compact header and thin grid lines",
+      "page_size": "a4_portrait",
+      "style": {
+        "table_family": "no_fill_administrative_grid",
+        "border_weight": "thin",
+        "header_fill": "none"
+      }
+    }
+  ]
+}

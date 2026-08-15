@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}{{ t(request, 'gallery') }} - TurkicDocGen{% endblock %}
+{% block content %}
+<header class="page-heading">
+  <div>
+    <h1>{{ t(request, 'gallery') }}</h1>
+    <p><span class="mono">{{ run_id or '—' }}</span> · {{ total }} {{ t(request, 'samples') }} · {{ page }}/{{ total_pages }}</p>
+    {% if index_status and not index_status.ready %}
+    <p class="status status-idle">{{ index_status.message }}</p>
+    {% endif %}
+  </div>
+  <div class="heading-actions">
+    {% if run_id %}
+    <label class="button compact secondary" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; min-height: 40px; margin: 0;">
+      <input type="checkbox" id="gallery-zones-toggle" style="width: 16px; min-height: auto; margin: 0;">
+      <span>{{ t(request, 'show_zones') }}</span>
+    </label>
+    <button class="button secondary" type="button" data-export-run="{{ run_id }}">
+      <svg class="icon"><use href="/static/icons.svg#download"></use></svg>{{ t(request, 'export') }}
+    </button>
+    {% endif %}
+  </div>
+</header>
+
+<section class="gallery-toolbar">
+  <form class="run-picker" method="get" action="/">
+    <label for="run-picker">{{ t(request, 'run_id') }}</label>
+    <select id="run-picker" name="run_id" data-submit-on-change>
+      {% for run in runs %}
+      <option value="{{ run.run_id }}" {% if run.run_id == run_id %}selected{% endif %}>{{ run.run_id }} ({{ run.sample_count }})</option>
+      {% endfor %}
+    </select>
+    <input type="hidden" name="output_base" value="{{ output_base }}">
+  </form>
+  <button class="button secondary filter-toggle" type="button" data-filter-toggle aria-expanded="false">
+    <svg class="icon"><use href="/static/icons.svg#filter"></use></svg>
+    {{ t(request, 'apply_filter') }}
+  </button>
+  <form class="filter-row" id="gallery-filters" method="get">
+    <input type="hidden" name="output_base" value="{{ output_base }}">
+    <input type="hidden" name="run_id" value="{{ run_id }}">
+    <label><span>{{ t(request, 'status') }}</span><select name="status_filter" data-submit-on-change>
+      <option value="all" {% if status_filter == 'all' %}selected{% endif %}>{{ t(request, 'all') }}</option>
+      <option value="accepted" {% if status_filter == 'accepted' %}selected{% endif %}>{{ t(request, 'accepted') }}</option>
+      <option value="rejected" {% if status_filter == 'rejected' %}selected{% endif %}>{{ t(request, 'rejected') }}</option>
+    </select></label>
+    <label><span>{{ t(request, 'language') }}</span><select name="lang_filter" data-submit-on-change><option value="">{{ t(request, 'all') }}</option>{% for value in unique_languages %}<option value="{{ value }}" {% if lang_filter == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></label>
+    <label><span>{{ t(request, 'layout') }}</span><select name="profile_filter" data-submit-on-change><option value="">{{ t(request, 'all') }}</option>{% for value in unique_profiles %}<option value="{{ value }}" {% if profile_filter == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></label>
+    <label><span>{{ t(request, 'effect_filter_placeholder') }}</span><select name="effect_filter" data-submit-on-change><option value="">{{ t(request, 'all') }}</option>{% for value in unique_effects %}<option value="{{ value }}" {% if effect_filter == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></label>
+    <label><span>{{ t(request, 'stamp') }}</span><select name="stamp_filter" data-submit-on-change><option value="">{{ t(request, 'all') }}</option><option value="with_stamp" {% if stamp_filter == 'with_stamp' %}selected{% endif %}>{{ t(request, 'yes') }}</option><option value="without_stamp" {% if stamp_filter == 'without_stamp' %}selected{% endif %}>{{ t(request, 'no_val') }}</option></select></label>
+    <label><span>{{ t(request, 'qa') }}</span><select name="warning_filter" data-submit-on-change><option value="">{{ t(request, 'all') }}</option>{% for value in unique_warnings %}<option value="{{ value }}" {% if warning_filter == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></label>
+    <label><span>{{ t(request, 'corpus_domain') }}</span><select name="domain_filter" data-submit-on-change><option value="">{{ t(request, 'all') }}</option>{% for value in unique_domains %}<option value="{{ value }}" {% if domain_filter == value %}selected{% endif %}>{{ value }}</option>{% endfor %}</select></label>
+    <a class="button compact ghost" href="/runs/{{ run_id }}/gallery?output_base={{ output_base }}">{{ t(request, 'clear_filters') }}</a>
+  </form>
+</section>
+
+<div class="active-filter-line" aria-live="polite">
+  {% for value in [lang_filter, profile_filter, effect_filter, stamp_filter, warning_filter, domain_filter] if value %}
+  <span>{{ value }}</span>
+  {% endfor %}
+</div>
+
+<section class="document-grid">
+  {% for row in rows %}
+  <article class="document-card">
+    <a class="document-preview" href="/runs/{{ run_id }}/sample/{{ row.get('id', '') }}?output_base={{ output_base }}" style="position: relative; overflow: hidden; display: block;">
+      {% if row.get('image') %}
+      <img src="/thumb?path={{ output_base }}/{{ run_id }}/{{ row.get('image') }}&w=360" alt="Документ {{ row.get('id', '') }}" loading="lazy" width="{{ 2339 if row.get('orientation') == 'landscape' else 1654 }}" height="{{ 1654 if row.get('orientation') == 'landscape' else 2339 }}">
+      <canvas class="gallery-zones-canvas hidden" data-run-id="{{ run_id }}" data-sample-id="{{ row.get('id', row.get('sample_id', '')) }}" data-output-base="{{ output_base }}" style="position: absolute; top: 0; left: 0; pointer-events: none; width: 100%; height: 100%;"></canvas>
+      {% else %}
+      <span>{{ t(request, 'no_image_available') }}</span>
+      {% endif %}
+    </a>
+    <div class="document-info">
+      <div class="document-title"><a href="/runs/{{ run_id }}/sample/{{ row.get('id', '') }}?output_base={{ output_base }}" class="mono">{{ row.get('id', '-') }}</a><span class="status status-{{ 'accepted' if row.get('qa_ok') else 'rejected' }}">{{ t(request, 'qa_ok') if row.get('qa_ok') else t(request, 'qa_fail') }}</span></div>
+      <dl class="compact-meta">
+        <div><dt>{{ t(request, 'language') }}</dt><dd>{{ row.get('language_mix', '-') }}</dd></div>
+        <div><dt>{{ t(request, 'layout') }}</dt><dd>{{ row.get('layout_id', '-') }}</dd></div>
+        <div><dt>{{ t(request, 'effect_filter_placeholder') }}</dt><dd>{{ row.get('effect_profile') or row.get('quality_profile', '-') }}</dd></div>
+      </dl>
+      <div class="card-flags">
+        {% if row.get('has_stamp') %}<span>{{ t(request, 'stamp') }}</span>{% endif %}
+        {% for warning in row.get('qa_flags', [])[:2] %}<span class="warning">{{ warning }}</span>{% endfor %}
+      </div>
+    </div>
+  </article>
+  {% else %}
+  <div class="empty-state">{{ t(request, 'no_samples_match') }}</div>
+  {% endfor %}
+</section>
+
+<nav class="pagination" aria-label="{{ t(request, 'page') }}">
+  {% set qs = 'run_id=' ~ run_id ~ '&output_base=' ~ output_base ~ '&status_filter=' ~ status_filter ~ '&lang_filter=' ~ lang_filter ~ '&profile_filter=' ~ profile_filter ~ '&effect_filter=' ~ effect_filter ~ '&stamp_filter=' ~ stamp_filter ~ '&warning_filter=' ~ warning_filter ~ '&domain_filter=' ~ domain_filter %}
+  {% if page > 1 %}<a class="icon-button" href="?page={{ page-1 }}&{{ qs }}" aria-label="{{ t(request, 'prev') }}"><svg class="icon"><use href="/static/icons.svg#chevron-left"></use></svg></a>{% endif %}
+  <span>{{ page }} / {{ total_pages }}</span>
+  {% if page < total_pages %}<a class="icon-button" href="?page={{ page+1 }}&{{ qs }}" aria-label="{{ t(request, 'next') }}"><svg class="icon"><use href="/static/icons.svg#chevron-right"></use></svg></a>{% endif %}
+</nav>
+{% endblock %}

@@ -1,0 +1,87 @@
+profiles:
+  visual_300:
+    count: 300
+    public: false
+  layout_realism_160:
+    count: 160
+    public: false
+    qa_only: true
+    stratified_layouts: true
+  internal_10k:
+    count: 10000
+    public: false
+  tiny_25k:
+    count: 25000
+    public: false
+  medium_50k:
+    count: 50000
+    public: false
+  large_100k:
+    count: 100000
+    public: true
+
+languages:
+  kk: 0.38
+  ky: 0.28
+  ru_kk: 0.20
+  ru_ky: 0.14
+  # ru: 0.00 - background control language, not allocated directly
+
+language_mixing:
+  enabled: true
+  feature_distribution:
+    field_level: 0.30
+    header_footer: 0.18
+    table_level: 0.18
+    parallel_lines: 0.12
+    abbreviation_level: 0.10
+    entity_level: 0.07
+    stamp_level: 0.04
+    section_level: 0.01
+
+layouts:
+  book_page_single_column: 0.07
+  book_page_two_columns: 0.04
+  academic_abstract_page: 0.05
+  official_statement_page: 0.05
+  official_letter_page: 0.05
+  simple_form_page: 0.04
+  simple_table_page: 0.02
+  bulletin_or_newspaper_page: 0.02
+  application_form_page: 0.04
+  certificate_page: 0.04
+  memo_page: 0.04
+  meeting_minutes_page: 0.04
+  registry_extract_page: 0.03
+  exam_sheet_page: 0.03
+  worksheet_page: 0.03
+  syllabus_page: 0.03
+  lecture_notes_page: 0.05
+  archival_notice_page: 0.04
+  historical_newspaper_page: 0.03
+  catalog_entry_page: 0.03
+  invoice_like_page: 0.04
+  receipt_like_page: 0.03
+  schedule_table_page: 0.03
+  glossary_page: 0.03
+  dictionary_entry_page: 0.03
+  index_page: 0.03
+  exam_register_page: 0.01
+  inventory_sheet_page: 0.01
+  attendance_sheet_page: 0.01
+  wide_schedule_page: 0.01
+
+quality:
+  clean: 0.24
+  office_scan: 0.18
+  low_dpi_scan: 0.12
+  photocopy: 0.14
+  phone_photo: 0.10
+  old_paper: 0.08
+  official_stamped: 0.14
+
+seed_policy:
+  deterministic: true
+  default_seed: 42
+
+image_format: jpg

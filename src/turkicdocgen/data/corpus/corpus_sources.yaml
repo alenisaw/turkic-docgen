@@ -1,0 +1,22 @@
+sources:
+  - name: Kazakh Wikipedia
+    type: open_corpus_candidate
+    license_note: "Check current Wikimedia licensing and attribution before use."
+    use_case: "Long-form Kazakh text snippets after proper attribution handling."
+  - name: KazQAD
+    type: open_dataset_candidate
+    license_note: "Check repository licence before ingest."
+    use_case: "Kazakh passage snippets and QA-style text fragments."
+  - name: Kazakh speech/text corpora
+    type: open_dataset_candidate
+    license_note: "Check dataset licence before ingest."
+    use_case: "Transcribed Kazakh utterances for sentence variety."
+  - name: Kyrgyz open corpus / word list sources
+    type: external_candidate
+    license_note: "Do not ingest without verifying licence."
+    use_case: "Kyrgyz word and phrase expansion."
+
+policy:
+  do_not_claim_seed_files_are_official_dictionary: true
+  require_source_and_license_metadata_for_external_ingest: true
+  allow_synthetic_fallback_generation: true

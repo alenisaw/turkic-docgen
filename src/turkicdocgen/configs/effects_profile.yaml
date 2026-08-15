@@ -1,0 +1,125 @@
+profiles:
+  clean:
+    weight: 0.30
+    required_effects: [paper_texture_light]
+    weighted_optional_effects: {}
+    transform_budget: 0.04
+  office_scan:
+    weight: 0.18
+    required_effects: [paper_texture_light, scanner_noise]
+    weighted_optional_effects:
+      scan_stripes: 0.75
+      scanline_jitter: 0.45
+      light_rotation: 0.85
+      uneven_illumination: 0.45
+      jpeg_compression: 0.70
+      paper_feed_bands: 0.35
+      signature_marks: 0.45
+    transform_budget: 0.16
+  low_dpi_scan:
+    weight: 0.12
+    required_effects: [downsample_upsample, jpeg_compression]
+    weighted_optional_effects:
+      paper_texture_light: 0.80
+      blur: 0.75
+      light_rotation: 0.80
+      toner_speckles: 0.55
+      scanline_jitter: 0.35
+      signature_marks: 0.35
+    transform_budget: 0.20
+  photocopy:
+    weight: 0.14
+    required_effects: [photocopy_contrast, toner_speckles, copy_border_shadow]
+    weighted_optional_effects:
+      paper_texture_light: 0.75
+      dark_printer_streaks: 0.65
+      roller_streaks: 0.70
+      toner_dropout: 0.65
+      scanner_noise: 0.45
+      ink_spots: 0.45
+      stains: 0.25
+      light_rotation: 0.90
+      paper_feed_bands: 0.50
+      repeated_copy_erosion: 0.35
+      print_through: 0.20
+      signature_marks: 0.50
+    transform_budget: 0.34
+  phone_photo:
+    weight: 0.10
+    required_effects: [light_perspective, edge_shadow, uneven_illumination]
+    weighted_optional_effects:
+      paper_texture_light: 0.75
+      jpeg_compression: 0.75
+      specular_highlight: 0.30
+      edge_curl_shadow: 0.25
+      moire: 0.20
+      signature_marks: 0.45
+    transform_budget: 0.42
+  old_paper:
+    weight: 0.08
+    required_effects: [paper_texture_light, paper_aging]
+    weighted_optional_effects:
+      faded_ink: 0.70
+      stains: 0.65
+      colored_blotches: 0.45
+      edge_shadow: 0.55
+      ink_spots: 0.55
+      print_through: 0.30
+      edge_curl_shadow: 0.25
+      signature_marks: 0.30
+    transform_budget: 0.28
+  official_stamped:
+    weight: 0.08
+    required_effects: [language_stamp, signature_marks, toner_speckles]
+    weighted_optional_effects:
+      paper_texture_light: 0.80
+      roller_streaks: 0.60
+      toner_dropout: 0.45
+      stains: 0.25
+      jpeg_compression: 0.55
+      light_rotation: 0.55
+    transform_budget: 0.30
+
+parameters:
+  rotation_degrees: [-0.8, 0.8]
+  office_scan_rotation_degrees: [-0.8, 0.8]
+  low_dpi_scan_rotation_degrees: [-1.2, 1.2]
+  photocopy_rotation_degrees: [-1.8, 1.8]
+  phone_photo_rotation_degrees: [-4.0, 4.0]
+  phone_photo_mild_rotation_degrees: [-4.0, 4.0]
+  phone_photo_moderate_rotation_degrees: [-8.0, 8.0]
+  phone_photo_extreme_rotation_degrees: [-14.0, 14.0]
+  stamp_rotation_degrees: [-12.0, 12.0]
+  stamp_heavy_rotation_degrees: [-18.0, 18.0]
+  perspective_corner_offset_ratio: [0.02, 0.06]
+  phone_photo_mild_corner_offset_ratio: [0.01, 0.04]
+  phone_photo_moderate_corner_offset_ratio: [0.04, 0.08]
+  phone_photo_extreme_corner_offset_ratio: [0.08, 0.12]
+  blur_radius: [0.18, 0.52]
+  jpeg_quality: [48, 78]
+  scan_stripes: [16, 40]
+  printer_streaks: [1, 4]
+  roller_streaks: [1, 5]
+  toner_speckles: [120, 340]
+  toner_dropout: [2, 7]
+  copy_border_alpha: [16, 42]
+  scanline_jitter_px: [1, 3]
+  color_blotches: [1, 3]
+  ink_spots: [24, 70]
+  pen_marks: [1, 3]
+  scanner_noise_points: [90, 190]
+  stamp_alpha: [72, 148]
+  stain_alpha: [16, 42]
+  stain_count: [1, 4]
+  low_dpi_width: [720, 980]
+  optional_effect_count: [2, 5]
+
+safety:
+  max_paragraph_text_pixel_coverage: 0.10
+  max_color_blot_text_coverage: 0.05
+  max_text_coverage_by_stamps: 0.12
+  max_total_visual_damage_coverage: 0.22
+  max_pen_crossed_body_lines: 2
+  protect_zone_types: [title, metadata]
+  reject_if_zone_polygon_invalid_after_transform: true
+  store_effect_chain_in_manifest: true

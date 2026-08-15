@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+title: TurkicDocGen
+message: "If you use TurkicDocGen, please cite both the software and the accompanying paper."
+type: software
+authors:
+  - family-names: Issayev
+    given-names: Alen
+license: Apache-2.0
+repository-code: "https://github.com/alenisaw/turkic-docgen"
+url: "https://github.com/alenisaw/turkic-docgen"
+version: 0.1.0
+date-released: 2026-08-15
+preferred-citation:
+  type: conference-paper
+  authors:
+    - family-names: Issayev
+      given-names: Alen
+    - family-names: Zhalgas
+      given-names: Aidana
+  title: "TurkicOCR-SVTRv2-B: Lightweight Line-Grounded Recognizer for Kazakh and Kyrgyz Optical Character Recognition"
+  collection-title: "Analysis of Images, Social Networks and Texts (AIST 2026)"
+  conference:
+    name: "AIST 2026"
+  year: 2026
+  publisher:
+    name: "Springer"
