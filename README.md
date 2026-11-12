@@ -12,6 +12,8 @@
   <img alt="Languages" src="https://img.shields.io/badge/languages-kk%20%7C%20ky%20%7C%20ru-2f6fed">
   <img alt="Dataset License" src="https://img.shields.io/badge/dataset%20license-CC%20BY%204.0-16a34a">
   <img alt="Code License" src="https://img.shields.io/badge/code%20license-Apache--2.0-f97316">
+  <a href="https://doi.org/10.1007/978-3-032-41546-2_22"><img alt="Paper DOI" src="https://img.shields.io/badge/Paper%20DOI-10.1007%2F978--3--032--41546--2__22-blue.svg"></a>
+  <a href="https://doi.org/10.57967/hf/9255"><img alt="Dataset DOI" src="https://img.shields.io/badge/Dataset%20DOI-10.57967%2Fhf%2F9255-green.svg"></a>
 </p>
 
 ---
@@ -147,9 +149,10 @@ The author would like to thank the Research and Innovation Center "CyberTech" at
   author={Issayev, Alen and Zhalgas, Aidana},
   booktitle={Analysis of Images, Social Networks and Texts (AIST 2026)},
   series={Lecture Notes in Computer Science (LNCS)},
-  publisher={Springer},
+  pages={342--358},
+  publisher={Springer Nature Switzerland},
   year={2026},
-  doi={10.1007/978-3-031-XXXXX-X_XX}
+  doi={10.1007/978-3-032-41546-2_22}
 }
 
 @misc{issayev_2026_turkicocr_cyrillic,

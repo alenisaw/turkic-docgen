@@ -15,12 +15,18 @@ preferred-citation:
   authors:
     - family-names: Issayev
       given-names: Alen
+      orcid: "https://orcid.org/0009-0006-5185-0250"
     - family-names: Zhalgas
       given-names: Aidana
+      orcid: "https://orcid.org/0000-0003-1091-8483"
   title: "TurkicOCR-SVTRv2-B: Lightweight Line-Grounded Recognizer for Kazakh and Kyrgyz Optical Character Recognition"
   collection-title: "Analysis of Images, Social Networks and Texts (AIST 2026)"
   conference:
     name: "AIST 2026"
-  year: 2026
+  series: "Lecture Notes in Computer Science (LNCS)"
   publisher:
-    name: "Springer"
+    name: "Springer Nature Switzerland"
+  start: 342
+  end: 358
+  year: 2026
+  doi: "10.1007/978-3-032-41546-2_22"
